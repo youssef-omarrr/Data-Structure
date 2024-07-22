@@ -364,16 +364,31 @@ int recover (int num){ //recovers the latest data in the recycle bin and adds it
     }     
 }
 
+void empty(){ //a function that empties the recycle bin
+    while (pdellast != NULL){
+        if (pdellast -> nextnode != NULL){
+            pdellast = pdellast -> nextnode;
+            free (pdellast -> prevnode);
+            pdellast -> prevnode = NULL;   
+        }
+        else{
+            pdelfirst = pdellast = NULL;
+        }
+    }
+    printf("!!Recycle bin has been cleared!!\n");
+}
+
 void print_list (){ //print_list function to print the list 🎅🏿
     node* test = pfirst;
+    printf("****************************\n");
     for (int i =0; test != NULL; i++){
         printf("index number %d is %d\n",i, test->data);
         test = test -> prevnode;
     }
     free (test);
+    printf("****************************\n");
     if (pdelfirst != NULL)
     {   
-        printf("****************************\n");
         printf("Recycle bin:\n");
         del* test = pdelfirst;
         for (int i =0; test != NULL; i++){
@@ -381,7 +396,12 @@ void print_list (){ //print_list function to print the list 🎅🏿
         test = test -> prevnode;
         }
         free (test);
-    }       
+        printf("****************************\n");
+    }   
+    else {
+        printf ("Recycle bin is empty.\n");
+        printf("****************************\n");
+    }    
 }
 
 void print_index (int index){ //prints a certain index not the full list

@@ -2,37 +2,37 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-typedef struct node{
+typedef struct node_stk{
     int data;
-    struct node* pnext;
-} node;
+    struct node_stk* pnext;
+} node_stk;
 
-node* ptop;
+node_stk* ptop;
 
-node* create_node(int data){ 
-    node* pnode = (node*) malloc(sizeof(node));
-    if (pnode != NULL){
-            pnode -> data = data;
-            pnode -> pnext = NULL;
+node_stk* create_node_stk(int data){ 
+    node_stk* pnode_stk = (node_stk*) malloc(sizeof(node_stk));
+    if (pnode_stk != NULL){
+            pnode_stk -> data = data;
+            pnode_stk -> pnext = NULL;
         }
-    return pnode;
+    return pnode_stk;
 }
 
 void push(int data){
-    node* pnode = create_node(data);
-    if (pnode != NULL){ //check ifnode is created
-        pnode -> pnext = ptop; //make the new node points to the data under it pointed by old ptop
-        ptop = pnode; //makes the data on top the new ptop
+    node_stk* pnode_stk = create_node_stk(data);
+    if (pnode_stk != NULL){ //check ifnode_stk is created
+        pnode_stk -> pnext = ptop; //make the new node_stk points to the data under it pointed by old ptop
+        ptop = pnode_stk; //makes the data on top the new ptop
     }
 }
 
 void pop(){
-    node* pnode = ptop;
-    if (pnode != NULL){
-        printf("Poped data: %d\n", pnode -> data);
-        ptop = pnode -> pnext;
-        free(pnode);
-        pnode = NULL;
+    node_stk* pnode_stk = ptop;
+    if (pnode_stk != NULL){
+        printf("Poped data: %d\n", pnode_stk -> data);
+        ptop = pnode_stk -> pnext;
+        free(pnode_stk);
+        pnode_stk = NULL;
     }
     else{
         printf("stack is empty!");
@@ -56,13 +56,13 @@ void many_pops (int n){
 }
 
 void print_stack(){
-    node* pnode = ptop;
+    node_stk* pnode_stk = ptop;
     printf("-----------------\n");
-    while (pnode != NULL){
-        printf("%d\n", pnode->data);
-        pnode = pnode -> pnext;
+    while (pnode_stk != NULL){
+        printf("%d\n", pnode_stk->data);
+        pnode_stk = pnode_stk -> pnext;
     }
-    free(pnode);
-    pnode = NULL;
+    free(pnode_stk);
+    pnode_stk = NULL;
     printf("-----------------\n");
 }

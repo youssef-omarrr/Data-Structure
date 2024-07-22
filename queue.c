@@ -2,39 +2,39 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-typedef struct node{
+typedef struct qnode{
     int data;
-    struct node* pnext;
-} node;
+    struct qnode* pnext;
+} qnode;
 
-node *pfirst, *plast;
+qnode *pfirstq, *plastq;
 
-node* create_node(int data){ 
-    node* pnode = (node*) malloc(sizeof(node));
-    if (pnode != NULL){
-            pnode -> data = data;
-            pnode -> pnext = NULL;
+qnode* create_qnode(int data){ 
+    qnode* pqnode = (qnode*) malloc(sizeof(qnode));
+    if (pqnode != NULL){
+            pqnode -> data = data;
+            pqnode -> pnext = NULL;
         }
-    return pnode;
+    return pqnode;
 }
 
 void qpush (int data){
-    node* pnode = create_node(data);
+    qnode* pqnode = create_qnode(data);
 
-    if (pfirst == plast && pfirst == NULL){
-        pfirst = plast = pnode;
+    if (pfirstq == plastq && pfirstq == NULL){
+        pfirstq = plastq = pqnode;
     }
     else{
-        plast -> pnext = pnode;
-        plast = pnode;
+        plastq -> pnext = pqnode;
+        plastq = pqnode;
     }
 }
 
 void qpop(){
-    if (pfirst != NULL){
-        printf("Poped data: %d\n", pfirst -> data);
-        node* temp = pfirst;
-        pfirst = pfirst -> pnext;
+    if (pfirstq != NULL){
+        printf("Poped data: %d\n", pfirstq -> data);
+        qnode* temp = pfirstq;
+        pfirstq = pfirstq -> pnext;
         free (temp);
         temp = NULL;
     }
@@ -60,13 +60,13 @@ void many_qpops (int n){
 }
 
 void print_queue(){
-    node* pnode = pfirst;
+    qnode* pqnode = pfirstq;
     printf("-----------------\n");
-    while (pnode != NULL){
-        printf("%d\n", pnode->data);
-        pnode = pnode -> pnext;
+    while (pqnode != NULL){
+        printf("%d\n", pqnode->data);
+        pqnode = pqnode -> pnext;
     }
-    free(pnode);
-    pnode = NULL;
+    free(pqnode);
+    pqnode = NULL;
     printf("-----------------\n");
 }
