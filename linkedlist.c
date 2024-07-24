@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include "linkedlist.h"
 
 typedef struct node{
     int data;
@@ -17,7 +18,7 @@ typedef struct del{ //linked list for deleted data 🎅🏿
 node *pfirst, *plast; //declared in global so it is intialized with NULL
 del  *pdelfirst, *pdellast;
 
-node* create_node(int data){
+static node* create_node(int data){
     node* pnode = (node*)malloc(sizeof(node)); //free memory for the node
     if (pnode != NULL) //node created succesfully(i dnot know how to spell successfullyy)
     {   
@@ -29,7 +30,7 @@ node* create_node(int data){
     return NULL; //no need for else bec. the function terminates after the first return
 }
 
-del* create_node_del (int data){ //creates a node for deleted data
+static del* create_node_del (int data){ //creates a node for deleted data
     del* pnode = (del*)malloc(sizeof(del)); //free memory for the node
     if (pnode != NULL) //node created succesfully(i dnot know how to spell successfullyy)
     {   
@@ -52,7 +53,7 @@ void add_front(int data){
     }
 }
 
-void add_back_del(int data_del){ //adds deleted data
+static void add_back_del(int data_del){ //adds deleted data
     del* pnode = create_node_del(data_del);
     if (pdelfirst == NULL)
         pdelfirst = pdellast = pnode;

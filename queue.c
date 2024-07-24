@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include "queue.h"
 
 typedef struct qnode{
     int data;
@@ -9,7 +10,7 @@ typedef struct qnode{
 
 qnode *pfirstq, *plastq;
 
-qnode* create_qnode(int data){ 
+static qnode* create_qnode(int data){ 
     qnode* pqnode = (qnode*) malloc(sizeof(qnode));
     if (pqnode != NULL){
             pqnode -> data = data;

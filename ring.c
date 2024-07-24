@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include "ring.h"
 
 typedef struct rnode{
     int data;
@@ -9,7 +10,7 @@ typedef struct rnode{
 
 rnode *prfirst, *prlast;
 
-rnode* create_rnode(int data){
+static rnode* create_rnode(int data){
     rnode* prnode = (rnode*) malloc(sizeof(rnode));
     if (prnode != NULL){
         prnode -> data = data;
@@ -36,7 +37,7 @@ void add_node_back(int data){ //adds a node at the end of the ring
     }
 }
 
-void add_node_front(int data){ //adds a node at the begining of the node 
+void add_node_front(int data){ //adds a node at the begining of the ring 
     rnode* prnode = create_rnode(data);
 
     if (prfirst == NULL){
