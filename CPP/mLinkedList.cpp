@@ -1,4 +1,5 @@
 #include "mLinkedList.h"
+#include <iostream>
 
 /////----- DATA ENTERY ------/////
 // add data to the front of the list
@@ -149,8 +150,8 @@ void DoubleLinkedList<T>::set(int index, T element)
 template <typename T>
 bool DoubleLinkedList<T>::isEmpty()
 {
-    //if it equalls zero (true) it means it is empty
-    return list_size==0;
+    // if it equalls zero (true) it means it is empty
+    return list_size == 0;
 }
 
 template <typename T>
@@ -183,7 +184,7 @@ DoubleLinkedList<T> DoubleLinkedList<T>::sublist(int from_index, int to_index)
     DoubleLinkedList<T> ans;
 
     // check if indices are within range and valid
-    if (from_index < 0 || to_index >= list_size || from_index > to_index)
+    if (from_index < 0 || to_index >= list_size)
     {
         // return an empty list if the range is invalid
         return ans;
@@ -199,14 +200,38 @@ DoubleLinkedList<T> DoubleLinkedList<T>::sublist(int from_index, int to_index)
             temp = temp->next;
 
         // now we are at from index
-        for (int i = from_index; i <= to_index; i++)
+        // if from_index less than to_index then we will add data in order
+        if (from_index <= to_index)
         {
-            ans.add_back(temp->data);
-            temp = temp->next;
+            for (int i = from_index; i <= to_index; i++)
+            {
+
+                ans.add_back(temp->data);
+                // go forward
+                temp = temp->next;
+            }
+        }
+        // else we will add data in reverse order
+        else if (from_index > to_index)
+        {
+            for (int i = to_index; i <= from_index; i++)
+            {
+                ans.add_back(temp->data);
+                // go back
+                temp = temp->prev;
+            }
         }
     }
 
     return ans;
+}
+
+template <typename T>
+void DoubleLinkedList<T>::display()
+{
+    for (int i = 0; i < list_size; i++)
+        std::cout << get(i) << " ";
+    std::cout << std::endl;
 }
 
 /////----- DATA REMOVAL ------/////

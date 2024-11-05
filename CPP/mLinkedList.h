@@ -42,6 +42,7 @@ public:
     int size();
     DoubleLinkedList<T> sublist(int from_index, int to_index);
     bool contains(T element);
+    void display();
 
 private:
     // a pointer to the FIRST node
